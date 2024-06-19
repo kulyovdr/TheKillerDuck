@@ -7,7 +7,6 @@ public class GameInput : MonoBehaviour
     public static GameInput Instance { get; private set; }
     private PlayerInputActions _playerInputActions;
 
-
     public event EventHandler OnPlayerAttack;
 
     private void Awake()
@@ -25,6 +24,11 @@ public class GameInput : MonoBehaviour
         Vector2 inputVector = _playerInputActions.Player.Move.ReadValue<Vector2>();
         return inputVector;
     }
+    public bool IsAttacking()
+    {
+        return _playerInputActions.Comdat.Attack.triggered;
+    }
+
     public Vector3 GetMousePosition()
     {
         Vector3 mousePosit = Mouse.current.position.ReadValue();

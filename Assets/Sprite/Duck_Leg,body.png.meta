@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 883692c100313984ab9c785320c76261
+guid: 1a6d418184e828d45a5f3b54bcd20352
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -46,7 +46,7 @@ TextureImporter:
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 9
+  alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
@@ -162,7 +162,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Duck_0
+      name: Duck_Leg,body_0
       rect:
         serializedVersion: 2
         x: 0
@@ -170,20 +170,20 @@ TextureImporter:
         width: 960
         height: 1080
       alignment: 9
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.701936, y: 0.4069999}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 023281637603958418f6f245700aabca
-      internalID: -635232427
+      spriteID: 72ff34d2ecacf2f438ed88c5c036ee01
+      internalID: -746034298
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Duck_1
+      name: Duck_Leg,body_1
       rect:
         serializedVersion: 2
         x: 960
@@ -191,14 +191,14 @@ TextureImporter:
         width: 960
         height: 1080
       alignment: 9
-      pivot: {x: 0.3299951, y: 0.3745551}
+      pivot: {x: 0.32282817, y: 0.39868852}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5d5018734ecec5849b0fbe30ac45c0b9
-      internalID: -421886046
+      spriteID: 3007d6eeb305f0149884d95d85063b4f
+      internalID: 2128864761
       vertices: []
       indices: 
       edges: []
@@ -214,8 +214,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Duck_0: -635232427
-      Duck_1: -421886046
+      Duck_Leg,body_0: -746034298
+      Duck_Leg,body_1: 2128864761
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
