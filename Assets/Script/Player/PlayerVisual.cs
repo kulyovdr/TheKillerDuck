@@ -1,6 +1,9 @@
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+[RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(Animator))]
+
+public class PlayerVisual : MonoBehaviour
 {
     private Animator _animator;
     private SpriteRenderer _spriteRenderer;

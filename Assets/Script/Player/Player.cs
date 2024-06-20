@@ -1,20 +1,19 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(Rigidbody2D))]
 
 public class Player : MonoBehaviour
 {
     [SerializeField] public float health;
-    [SerializeField] private float _countHearts;
-    [SerializeField] private float heal;
+    [SerializeField] private float _moveSpeed = 10f;
+    [SerializeField] private float _heal;
 
     [SerializeField] private Image[] _hearts;
     [SerializeField] private Sprite _fullHeart;
     [SerializeField] private Sprite _emptyHeart;
-
-    [SerializeField] private float _moveSpeed = 10f;
+    [SerializeField] private float _countHearts;
 
     private Rigidbody2D _rigidbody2D;
 
@@ -36,7 +35,6 @@ public class Player : MonoBehaviour
         _rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
-    // --Передвижение--
     private void Update()
     {
         MoveCalculate();
@@ -47,7 +45,7 @@ public class Player : MonoBehaviour
         _moveInput = GameInput.Instance.GetMovementVector();
         _moveVelocity = _moveInput.normalized * _moveSpeed;
 
-        if (Mathf.Abs(_moveInput.x) > _minMoveSpeed || Mathf.Abs(_moveInput.y) > _minMoveSpeed)
+        if (Mathf.Abs(_moveInput.x) > _minMoveSpeed || Mathf.Abs(_moveInput.y) > _minMoveSpeed) 
         {
             _isRun = true;
         }
@@ -79,7 +77,7 @@ public class Player : MonoBehaviour
 
     private void healHearts()
     {
-        health += Time.deltaTime * heal;
+        health += Time.deltaTime * _heal;
     }
 
     private void FixedUpdate()

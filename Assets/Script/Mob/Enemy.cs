@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private bool _isAttackEnemy = false;
     [SerializeField] private float _attackDistance = 2f;
     [SerializeField] private float _attackRate = 2f;
-    [SerializeField] private float _damage = -35f;
+    [SerializeField] private float _damage = 35f;
     private float _nextAttackTime = 0;
 
     private NavMeshAgent _navMeshAgent;
@@ -39,25 +39,18 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        StateHendler();
+        StateHandler();
         MovementDirectHandler();
     }
 
-    public void SetDeathState()
-    {
-        _navMeshAgent.ResetPath();
-        _currentState = State.Death;
-    }
-
-
-    private void StateHendler()
+    private void StateHandler()
     {
         switch (_currentState)
         {
             case State.Chasing:
                 ChasingTarget();
                 CheckCurrentState();
-               break;
+                break;
 
             case State.Attacking:
                 AttackingTarget();
@@ -74,14 +67,21 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    public void SetDeathState()
+    {
+        _navMeshAgent.ResetPath();
+        _currentState = State.Death;
+    }
+
+
     private void AttackingTarget()
     {
-        if (Time.time > _nextAttackTime)
-        {
+       if (Time.time > _nextAttackTime)
+       {
             OnEnemyAttack?.Invoke(this, EventArgs.Empty);
 
             _nextAttackTime = Time.time + _attackRate;
-        }
+       }
     }
 
     public void AttackForPlayer()
@@ -94,11 +94,10 @@ public class Enemy : MonoBehaviour
     {
         _navMeshAgent.SetDestination(Player.Instance.transform.position);
     }
-
     private void CheckCurrentState()
     {
         float distanceToPlayer = Vector3.Distance(transform.position, Player.Instance.transform.position);
-        State newState = State.Chasing;
+        State newState = State.Idle;
 
         if (_isChasingEnemy)
         {

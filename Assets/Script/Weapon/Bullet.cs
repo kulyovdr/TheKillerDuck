@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -8,9 +9,26 @@ public class Bullet : MonoBehaviour
     [SerializeField] private int _damage;
     [SerializeField] private LayerMask _whatIsSolid;
 
+    private bool _isMoving = false;
+
+
     private void Update()
     {
         HitAndFind();
+        if (_isMoving)
+        {
+            DestroyAfterEndOfLifeTime();
+        }
+    }
+
+    public float GetLifeTime()
+    {
+        return _lifeTime;
+    }
+
+    public void ActivateBullet()
+    {
+        _isMoving = true;
     }
 
     private void HitAndFind()
@@ -25,6 +43,19 @@ public class Bullet : MonoBehaviour
             }
             Destroy(gameObject);
         }
-        transform.Translate(Vector2.right * _speed * Time.deltaTime);
+        if (_isMoving)
+        {
+            transform.Translate(Vector2.right * _speed * Time.deltaTime);
+        }
+    }
+
+    private void DestroyAfterEndOfLifeTime()
+    {
+        if (_lifeTime < 0)
+        {
+            Destroy(gameObject);
+        }
+
+        _lifeTime -= Time.deltaTime;
     }
 }

@@ -19,7 +19,7 @@ public class SceletonVisual : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-
+   
     private void Start()
     {
         _enemyAI.OnEnemyAttack += _enemyAI_OnEnemyAttack; //подписались на событие
@@ -45,14 +45,13 @@ public class SceletonVisual : MonoBehaviour
 
     private void Update()
     {
-        _animator.SetBool(IS_RUNNING, _enemyAI.IsRunning());
+        _animator.SetBool(IS_RUNNING, _enemyAI.IsRunning());  
     }
 
     public void TriggerAttackAnimationTurnOff()
     {
         _enemyEntry.PolygonColliderTurnOff();
     }
-
     public void TriggerAttackAnimationTurnOn()
     {
         _enemyEntry.PolygonColliderTurnOn();
