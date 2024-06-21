@@ -39,7 +39,7 @@ public class Bullet : MonoBehaviour
         {
             if (hitInfo.collider.CompareTag("Enemy"))
             {
-                hitInfo.collider.GetComponent<EnemyEntry>().TakeDamage(_damage);
+                hitInfo.collider.GetComponent<Worm>().TakeDamage(_damage);
             }
             Destroy(gameObject);
         }

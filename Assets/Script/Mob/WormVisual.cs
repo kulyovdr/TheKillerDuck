@@ -1,30 +1,36 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(SpriteRenderer))]
-public class SceletonVisual : MonoBehaviour
+
+public class WormVisual : MonoBehaviour
 {
-    [SerializeField] private Enemy _enemyAI;
-    [SerializeField] private EnemyEntry _enemyEntry;
+    [SerializeField] private Worm _worm;
+
     private Animator _animator;
+    private SpriteRenderer _spriteRenderer;
 
     private const string IS_RUNNING = "IsRun";
     private const string ATTACK = "Attack";
     private const string IS_DIE = "IsDie";
 
-    SpriteRenderer _spriteRenderer;
     private void Awake()
     {
         _animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-   
     private void Start()
     {
-        _enemyAI.OnEnemyAttack += _enemyAI_OnEnemyAttack; //подписались на событие
-        _enemyEntry.OnDie += _enemyEntry_OnDie;
+        _worm.OnEnemyAttack += _enemyAI_OnEnemyAttack; 
+        _worm.OnDie += _enemyEntry_OnDie;
     }
+
+    private void Update()
+    {
+        _animator.SetBool(IS_RUNNING, _worm.IsRunning());
+    }
+
+
     private void _enemyAI_OnEnemyAttack(object sender, System.EventArgs e)
     {
         _animator.SetTrigger(ATTACK);
@@ -36,25 +42,19 @@ public class SceletonVisual : MonoBehaviour
         _spriteRenderer.sortingOrder = -1;
     }
 
-
-    private void OnDestroy() // отписались
+    private void OnDestroy() 
     {
-        _enemyAI.OnEnemyAttack -= _enemyAI_OnEnemyAttack;
-    }
-
-
-    private void Update()
-    {
-        _animator.SetBool(IS_RUNNING, _enemyAI.IsRunning());  
+        _worm.OnEnemyAttack -= _enemyAI_OnEnemyAttack;
+        _worm.OnDie -= _enemyEntry_OnDie;
     }
 
     public void TriggerAttackAnimationTurnOff()
     {
-        _enemyEntry.PolygonColliderTurnOff();
+        _worm.PolygonColliderTurnOff();
     }
     public void TriggerAttackAnimationTurnOn()
     {
-        _enemyEntry.PolygonColliderTurnOn();
+        _worm.PolygonColliderTurnOn();
     }
 }
 
