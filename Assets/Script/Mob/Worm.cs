@@ -23,7 +23,7 @@ public class Worm : MonoBehaviour
     [SerializeField] private int _maxHP;
     private int _currentHealth;
 
-    private float _nextAttackTime = 0;
+    private float _nextAttackTime = 1;
     private float _nextCheckDirectionTime = 0f;
     private float _checkDirectionDuration = 0.1f;
     private Vector3 _lastPosition;
@@ -77,7 +77,6 @@ public class Worm : MonoBehaviour
             case State.Attacking:
                 AttackingTarget();
                 CheckCurrentState();
-                AttackForPlayer();
                 break;
 
             case State.Death:
@@ -106,19 +105,15 @@ public class Worm : MonoBehaviour
     //---Боевка---
     private void AttackingTarget()
     {
+        Player player = new Player();
         if (Time.time > _nextAttackTime)
         {
+            player.ChangeHealth(-_damage);
             OnEnemyAttack?.Invoke(this, EventArgs.Empty);
 
             _nextAttackTime = Time.time + _attackRate;
         }
     }
-    public void AttackForPlayer()
-    {
-        Player player = new Player();
-        player.ChangeHealth(-_damage);
-    }
-
 
     public void PolygonColliderTurnOff()
     {

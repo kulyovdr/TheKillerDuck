@@ -100,6 +100,11 @@ public class Player : MonoBehaviour
     public void ChangeHealth(float healthValue)
     {
         health += healthValue;
+
+        if (health <= 0) 
+        {
+            Destroy(gameObject); 
+        }
     }
 
     private void GameInput_OnPLayerAttack(object sender, System.EventArgs e)

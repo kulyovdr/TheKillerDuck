@@ -21,8 +21,8 @@ public class WormVisual : MonoBehaviour
 
     private void Start()
     {
-        _worm.OnEnemyAttack += _enemyAI_OnEnemyAttack; 
-        _worm.OnDie += _enemyEntry_OnDie;
+        _worm.OnEnemyAttack += OnEnemyAttack; 
+        _worm.OnDie += OnDie;
     }
 
     private void Update()
@@ -31,12 +31,12 @@ public class WormVisual : MonoBehaviour
     }
 
 
-    private void _enemyAI_OnEnemyAttack(object sender, System.EventArgs e)
+    private void OnEnemyAttack(object sender, System.EventArgs e)
     {
         _animator.SetTrigger(ATTACK);
     }
 
-    private void _enemyEntry_OnDie(object sender, System.EventArgs e)
+    private void OnDie(object sender, System.EventArgs e)
     {
         _animator.SetBool(IS_DIE, true);
         _spriteRenderer.sortingOrder = -1;
@@ -44,8 +44,8 @@ public class WormVisual : MonoBehaviour
 
     private void OnDestroy() 
     {
-        _worm.OnEnemyAttack -= _enemyAI_OnEnemyAttack;
-        _worm.OnDie -= _enemyEntry_OnDie;
+        _worm.OnEnemyAttack -= OnEnemyAttack;
+        _worm.OnDie -= OnDie;
     }
 
     public void TriggerAttackAnimationTurnOff()
