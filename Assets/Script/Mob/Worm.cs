@@ -9,21 +9,19 @@ using System;
 public class Worm : MonoBehaviour
 {
     [SerializeField] private State _startState;
-    private State _currentState;
+    [SerializeField] private State _currentState;
 
-    [SerializeField] private bool _isRun = false;
-    [SerializeField] private float _RunDistance = 4f;
+    [SerializeField] private float _RunDistance;
     [SerializeField] private float _runSpeed;
 
-    [SerializeField] private bool _isAttack = false;
-    [SerializeField] private float _attackDistance = 2f;
-    [SerializeField] private float _attackRate = 2f;
-    [SerializeField] private float _damage = 35f;
+    [SerializeField] private float _attackDistance;
+    [SerializeField] private float _attackRate;
+    [SerializeField] private float _damage;
 
     [SerializeField] private int _maxHP;
     private int _currentHealth;
 
-    private float _nextAttackTime = 1;
+    private float _nextAttackTime = 1f;
     private float _nextCheckDirectionTime = 0f;
     private float _checkDirectionDuration = 0.1f;
     private Vector3 _lastPosition;
@@ -52,6 +50,8 @@ public class Worm : MonoBehaviour
 
         _currentState = _startState;
         _runSpeed = _navMeshAgent.speed;
+
+        _lastPosition = transform.position;
     }
 
     private void Start()
@@ -63,6 +63,7 @@ public class Worm : MonoBehaviour
     {
         StateHandler();
         MovementDirectHandler();
+        DetectDeath();
     }
 
     private void StateHandler()
@@ -84,7 +85,47 @@ public class Worm : MonoBehaviour
 
             default:
             case State.Idle:
+                CheckCurrentState();
                 break;
+        }
+    }
+
+    private void CheckCurrentState()
+    {
+        float distanceToPlayer;
+        if (Player.Instance != null)
+        {
+            distanceToPlayer = Vector3.Distance(transform.position, Player.Instance.transform.position);
+        }
+        else
+        {
+            distanceToPlayer = _RunDistance + 1f;
+        }
+        State newState = State.Idle;
+
+        if (distanceToPlayer <= _RunDistance)
+        {
+            newState = State.Chasing;
+        }
+
+        if (distanceToPlayer <= _attackDistance)
+        {
+            newState = State.Attacking;
+        }
+
+        if (newState != _currentState)
+        {
+            if (newState == State.Chasing)
+            {
+                _navMeshAgent.ResetPath();
+                _navMeshAgent.speed = _runSpeed;
+
+            }
+            else if (newState == State.Attacking)
+            {
+                _navMeshAgent.ResetPath();
+            }
+            _currentState = newState;
         }
     }
 
@@ -105,10 +146,9 @@ public class Worm : MonoBehaviour
     //---Боевка---
     private void AttackingTarget()
     {
-        Player player = new Player();
-        if (Time.time > _nextAttackTime)
+        if (Time.time > _nextAttackTime && Player.Instance != null)
         {
-            player.ChangeHealth(-_damage);
+            Player.Instance.ChangeHealth(-_damage);
             OnEnemyAttack?.Invoke(this, EventArgs.Empty);
 
             _nextAttackTime = Time.time + _attackRate;
@@ -127,6 +167,8 @@ public class Worm : MonoBehaviour
     //---Смерть---
     public void SetDeathState()
     {
+        _boxCollider2D.enabled = false;
+        _polygonCollider2D.enabled = false;
         _navMeshAgent.ResetPath();
         _currentState = State.Death;
     }
@@ -136,57 +178,15 @@ public class Worm : MonoBehaviour
         _currentHealth -= damage;
 
         //OnTakeHit?.Invoke(this, EventArgs.Empty);
-        DetectDeath();
     }
     private void DetectDeath()
     {
         if (_currentHealth <= 0)
         {
-            _boxCollider2D.enabled = false;
-            _polygonCollider2D.enabled = false;
-
             SetDeathState();
 
             OnDie?.Invoke(this, EventArgs.Empty);
             Destroy(gameObject);
-        }
-    }
-
-
-    private void CheckCurrentState()
-    {
-        float distanceToPlayer = Vector3.Distance(transform.position, Player.Instance.transform.position);
-        State newState = State.Idle;
-
-        if (_isRun)
-        {
-            if (distanceToPlayer <= _RunDistance)
-            {
-                newState = State.Chasing;
-            }
-        }
-
-        if (_isAttack)
-        {
-            if (distanceToPlayer <= _attackDistance)
-            {
-                newState = State.Attacking;
-            }
-        }
-
-        if (newState != _currentState)
-        {
-            if (newState == State.Chasing)
-            {
-                _navMeshAgent.ResetPath();
-                _navMeshAgent.speed = _runSpeed;
-
-            }
-            else if (newState == State.Attacking)
-            {
-                _navMeshAgent.ResetPath();
-            }
-            _currentState = newState;
         }
     }
 

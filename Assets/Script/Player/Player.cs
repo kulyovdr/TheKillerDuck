@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
     [SerializeField] public float health;
-    [SerializeField] private float _moveSpeed = 10f;
+    [SerializeField] private float _moveSpeed;
     [SerializeField] private float _heal;
 
     [SerializeField] private Image[] _hearts;
@@ -53,7 +53,7 @@ public class Player : MonoBehaviour
         { _isRun = false; }      
     }
 
-    private void statsHearts()
+    private void StatsHearts()
     {
         if (health > _countHearts)
         {
@@ -75,15 +75,15 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void healHearts()
+    private void HealHearts()
     {
         health += Time.deltaTime * _heal;
     }
 
     private void FixedUpdate()
     {   
-        healHearts();
-        statsHearts();
+        HealHearts();
+        StatsHearts();
         _rigidbody2D.MovePosition(_rigidbody2D.position + _moveVelocity * Time.fixedDeltaTime);
     }
     public Vector3 GetPlayerPos()
