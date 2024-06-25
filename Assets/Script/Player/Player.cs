@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Sprite _fullHeart;
     [SerializeField] private Sprite _emptyHeart;
     [SerializeField] private float _countHearts;
+    [SerializeField] private GameObject _deathPanel;
 
     private Rigidbody2D _rigidbody2D;
 
@@ -32,7 +33,7 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        _rigidbody2D = GetComponent<Rigidbody2D>();
+        _rigidbody2D = GetComponent<Rigidbody2D>();   
     }
 
     private void Update()
@@ -103,7 +104,8 @@ public class Player : MonoBehaviour
 
         if (health <= 0) 
         {
-            Destroy(gameObject); 
+            Destroy(gameObject);       
+            _deathPanel.SetActive(true);
         }
     }
 

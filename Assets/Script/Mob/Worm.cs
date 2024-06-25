@@ -3,7 +3,6 @@ using UnityEngine.AI;
 using System;
 
 [RequireComponent(typeof(PolygonCollider2D))]
-[RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(NavMeshAgent))]
 
 public class Worm : MonoBehaviour
@@ -27,7 +26,6 @@ public class Worm : MonoBehaviour
     private Vector3 _lastPosition;
 
     private PolygonCollider2D _polygonCollider2D;
-    private BoxCollider2D _boxCollider2D;
     private NavMeshAgent _navMeshAgent;
 
     public event EventHandler OnEnemyAttack;
@@ -42,7 +40,6 @@ public class Worm : MonoBehaviour
     private void Awake()
     {
         _polygonCollider2D = GetComponent<PolygonCollider2D>();
-        _boxCollider2D = GetComponent<BoxCollider2D>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
 
         _navMeshAgent.updateRotation = false;
@@ -114,17 +111,7 @@ public class Worm : MonoBehaviour
         }
 
         if (newState != _currentState)
-        {
-            if (newState == State.Chasing)
-            {
-                _navMeshAgent.ResetPath();
-                _navMeshAgent.speed = _runSpeed;
-
-            }
-            else if (newState == State.Attacking)
-            {
-                _navMeshAgent.ResetPath();
-            }
+        { 
             _currentState = newState;
         }
     }
@@ -148,8 +135,8 @@ public class Worm : MonoBehaviour
     {
         if (Time.time > _nextAttackTime && Player.Instance != null)
         {
-            Player.Instance.ChangeHealth(-_damage);
             OnEnemyAttack?.Invoke(this, EventArgs.Empty);
+            Player.Instance.ChangeHealth(-_damage);
 
             _nextAttackTime = Time.time + _attackRate;
         }
@@ -167,7 +154,6 @@ public class Worm : MonoBehaviour
     //---Смерть---
     public void SetDeathState()
     {
-        _boxCollider2D.enabled = false;
         _polygonCollider2D.enabled = false;
         _navMeshAgent.ResetPath();
         _currentState = State.Death;

@@ -17,7 +17,6 @@ public class GameManager : MonoBehaviour
 
     public void Pause()
     {
-        panelPause.SetActive(true);
         Time.timeScale = 0f;
     }
     public void Resume()
