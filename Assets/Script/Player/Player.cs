@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -30,6 +29,7 @@ public class Player : MonoBehaviour
     {
         GameInput.Instance.OnPlayerAttack += GameInput_OnPLayerAttack;
     }
+
     private void Awake()
     {
         Instance = this;
@@ -39,6 +39,22 @@ public class Player : MonoBehaviour
     private void Update()
     {
         MoveCalculate();
+    }
+
+    private void FixedUpdate()
+    {
+        HealHearts();
+        StatsHearts();
+        _rigidbody2D.MovePosition(_rigidbody2D.position + _moveVelocity * Time.fixedDeltaTime);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("DroppedHeart"))
+        {
+            ChangeHealth(1);
+            Destroy(other.gameObject);
+        }
     }
 
     private void MoveCalculate()
@@ -81,19 +97,13 @@ public class Player : MonoBehaviour
         health += Time.deltaTime * _heal;
     }
 
-    private void FixedUpdate()
-    {   
-        HealHearts();
-        StatsHearts();
-        _rigidbody2D.MovePosition(_rigidbody2D.position + _moveVelocity * Time.fixedDeltaTime);
-    }
     public Vector3 GetPlayerPos()
     {
         Vector3 playerScreenPos = Camera.main.WorldToScreenPoint(transform.position);
         return playerScreenPos;
     }
 
-    public bool isRunning()
+    public bool IsRunning()
     {
         return _isRun;
     }

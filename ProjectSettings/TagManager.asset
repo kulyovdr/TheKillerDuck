@@ -9,6 +9,9 @@ TagManager:
   - Wall
   - MUSIC_VOLUME_TEXT
   - MUSIC_VOLUME_SLIDER
+  - DroppedHeart
+  - RoomPoint
+  - Rooms
   layers:
   - Default
   - TransparentFX

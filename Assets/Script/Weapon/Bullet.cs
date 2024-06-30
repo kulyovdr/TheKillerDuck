@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -9,16 +8,11 @@ public class Bullet : MonoBehaviour
     [SerializeField] private int _damage;
     [SerializeField] private LayerMask _whatIsSolid;
 
-    private bool _isMoving = false;
-
 
     private void Update()
     {
         HitAndFind();
-        if (_isMoving)
-        {
-            DestroyAfterEndOfLifeTime();
-        }
+        DestroyAfterEndOfLifeTime();
     }
 
     public float GetLifeTime()
@@ -26,27 +20,19 @@ public class Bullet : MonoBehaviour
         return _lifeTime;
     }
 
-    public void ActivateBullet()
-    {
-        _isMoving = true;
-    }
-
     private void HitAndFind()
-    {     
-        if (_isMoving)
-        {
-            RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, transform.up, _distance, _whatIsSolid);
+    {
+        RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, transform.up, _distance, _whatIsSolid);
 
-            if (hitInfo.collider != null)
+        if (hitInfo.collider != null)
+        {
+            if (hitInfo.collider.CompareTag("Enemy"))
             {
-                if (hitInfo.collider.CompareTag("Enemy"))
-                {
-                    hitInfo.collider.GetComponent<Worm>().TakeDamage(_damage);
-                }
-                Destroy(gameObject);
+                hitInfo.collider.GetComponent<Worm>().TakeDamage(_damage);
             }
-            transform.Translate(Vector2.right * _speed * Time.deltaTime);
+            Destroy(gameObject);
         }
+        transform.Translate(Vector2.right * _speed * Time.deltaTime);
     }
 
     private void DestroyAfterEndOfLifeTime()

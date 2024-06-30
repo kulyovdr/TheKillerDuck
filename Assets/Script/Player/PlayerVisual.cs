@@ -18,7 +18,7 @@ public class PlayerVisual : MonoBehaviour
 
     private void Update()
     {
-        _animator.SetBool(IS_RUN, Player.Instance.isRunning());
+        _animator.SetBool(IS_RUN, Player.Instance.IsRunning());
         MovePos_ForMouse_ForKeyboard();
     }
 

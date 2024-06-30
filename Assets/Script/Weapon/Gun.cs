@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -33,9 +32,8 @@ public class Gun : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
-                var bulletClone = Instantiate(bullet, shotPoint.position, transform.rotation);
+                Instantiate(bullet, shotPoint.position, transform.rotation);
 
-                bulletClone.GetComponent<Bullet>().ActivateBullet();
                 _currentTimeBetweenShots = _timeBetweenShots;
             }
         }

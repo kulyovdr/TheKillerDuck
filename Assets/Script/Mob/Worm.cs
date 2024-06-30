@@ -17,6 +17,9 @@ public class Worm : MonoBehaviour
     [SerializeField] private float _attackRate;
     [SerializeField] private float _damage;
 
+    [SerializeField] private GameObject _droppedHeart;
+    [SerializeField] private GameObject _sword;
+
     [SerializeField] private int _maxHP;
     private int _currentHealth;
 
@@ -144,17 +147,20 @@ public class Worm : MonoBehaviour
 
     public void PolygonColliderTurnOff()
     {
-        _polygonCollider2D.enabled = false;
+        //_polygonCollider2D.enabled = false;
+        _sword.GetComponent<CapsuleCollider2D>().enabled = false;
     }
     public void PolygonColliderTurnOn()
     {
-        _polygonCollider2D.enabled = true;
+        //_polygonCollider2D.enabled = true;
+        _sword.GetComponent<CapsuleCollider2D>().enabled = true;
     }
 
     //---Смерть---
     public void SetDeathState()
     {
-        _polygonCollider2D.enabled = false;
+        //_polygonCollider2D.enabled = false;
+        _sword.GetComponent<CapsuleCollider2D>().enabled = false;
         _navMeshAgent.ResetPath();
         _currentState = State.Death;
     }
@@ -170,6 +176,7 @@ public class Worm : MonoBehaviour
         if (_currentHealth <= 0)
         {
             SetDeathState();
+            Instantiate(_droppedHeart, transform.position, transform.rotation);
 
             OnDie?.Invoke(this, EventArgs.Empty);
             Destroy(gameObject);
