@@ -4,28 +4,27 @@ using UnityEngine;
 
 public class Room : MonoBehaviour
 {
-    public enum OpeningType
-    {
-        Wall, Door
-    }
+    [SerializeField] private Openings _doors;
 
-    [SerializeField]
-    private Openings doors;
+    [SerializeField] private Openings _walls;
 
-    [SerializeField]
-    private Openings walls;
+    [SerializeField] private GameObject _linkRight;
+    [SerializeField] private GameObject _linkTop;
 
     public void Setup(HashSet<Vector2Int> config)
     {
-        foreach (var wall in walls.GetOpenings())
+        foreach (var wall in _walls.GetOpenings())
         {
             bool contains = config.Contains(wall.Pos);
             wall.GameObject.SetActive(!contains);
+            if (wall.Pos == Vector2Int.right)
+            {
+                _linkRight.SetActive(contains);
+            }
+            else if (wall.Pos == Vector2Int.up)
+            {
+                _linkTop.SetActive(contains);
+            }
         }
-    }
-
-    void Start()
-    {
-        
     }
 }

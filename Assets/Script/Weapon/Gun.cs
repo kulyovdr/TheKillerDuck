@@ -4,8 +4,8 @@ using UnityEngine;
 public class Gun : MonoBehaviour
 {
     [SerializeField] private float _offset;
-    [SerializeField] private GameObject bullet;
-    [SerializeField] private Transform shotPoint;
+    [SerializeField] private GameObject _bullet;
+    [SerializeField] private Transform _shotPoint;
 
     [SerializeField] private float _timeBetweenShots;
     private float _currentTimeBetweenShots;
@@ -32,7 +32,7 @@ public class Gun : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
-                Instantiate(bullet, shotPoint.position, transform.rotation);
+                Instantiate(_bullet, _shotPoint.position, transform.rotation);
 
                 _currentTimeBetweenShots = _timeBetweenShots;
             }

@@ -6,14 +6,14 @@ using UnityEngine;
 public class PlayerVisual : MonoBehaviour
 {
     private Animator _animator;
-    private SpriteRenderer _spriteRenderer;
+    //private SpriteRenderer _spriteRenderer;
 
     private const string IS_RUN = "IsRun";
 
     private void Awake()
     {
         _animator = GetComponent<Animator>();
-        _spriteRenderer = GetComponent<SpriteRenderer>();
+        //_spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Update()

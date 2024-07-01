@@ -12,6 +12,7 @@ TagManager:
   - DroppedHeart
   - RoomPoint
   - Rooms
+  - NavMeshSurface
   layers:
   - Default
   - TransparentFX

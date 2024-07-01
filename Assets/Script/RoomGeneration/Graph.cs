@@ -32,18 +32,18 @@ public class Graph : MonoBehaviour
 
         var dxdy = new Vector2Int[]
         {
-            new Vector2Int(0, 1),
-            new Vector2Int(1, 0),
-            new Vector2Int(0, -1),
-            new Vector2Int(-1, 0)
+            new (0, 1),
+            new (1, 0),
+            new (0, -1),
+            new (-1, 0)
         };
 
         var probs = new Vector2Int[]
         {
-            new Vector2Int(0, 25),
-            new Vector2Int(25, 50),
-            new Vector2Int(50, 75),
-            new Vector2Int(75, 100)
+            new (0, 25),
+            new (25, 50),
+            new (50, 75),
+            new (75, 100)
         };
 
         for (int i = 0; i < count - 1; i++)
@@ -121,18 +121,18 @@ public class Graph : MonoBehaviour
 
         var dxdy = new Vector2Int[]
         {
-            new Vector2Int(0, 1),
-            new Vector2Int(1, 0),
-            new Vector2Int(0, -1),
-            new Vector2Int(-1, 0)
+            new (0, 1),
+            new (1, 0),
+            new (0, -1),
+            new (-1, 0)
         };
 
         var probs = new Vector2Int[]
         {
-            new Vector2Int(0, 25),
-            new Vector2Int(25, 50),
-            new Vector2Int(50, 75),
-            new Vector2Int(75, 100)
+            new (0, 25),
+            new (25, 50),
+            new (50, 75),
+            new (75, 100)
         };
 
         for (int i = 0; i < count - 1; i++)

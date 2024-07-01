@@ -25,33 +25,29 @@ public class Openings : MonoBehaviour
         public GameObject GameObject;
     }
 
-    [SerializeField]
-    private Opening top;
+    [SerializeField] private Opening _top;
 
-    [SerializeField]
-    private Opening right;
+    [SerializeField] private Opening _right;
 
-    [SerializeField]
-    private Opening bottom;
+    [SerializeField] private Opening _bottom;
 
-    [SerializeField]
-    private Opening left;
+    [SerializeField] private Opening _left;
 
-    private List<Opening> list;
+    private List<Opening> _list;
 
     public List<Opening> GetOpenings()
     {
-        if (list == null)
+        if (_list == null)
         {
-            list = new List<Opening>()
+            _list = new List<Opening>()
             {
-                top,
-                right,
-                bottom,
-                left
+                _top,
+                _right,
+                _bottom,
+                _left
             };
         }
 
-        return list;
+        return _list;
     }
 }

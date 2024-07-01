@@ -11,7 +11,6 @@ public class Worm : MonoBehaviour
     [SerializeField] private State _currentState;
 
     [SerializeField] private float _RunDistance;
-    [SerializeField] private float _runSpeed;
 
     [SerializeField] private float _attackDistance;
     [SerializeField] private float _attackRate;
@@ -32,7 +31,6 @@ public class Worm : MonoBehaviour
     private NavMeshAgent _navMeshAgent;
 
     public event EventHandler OnEnemyAttack;
-    //public event EventHandler OnTakeHit;
     public event EventHandler OnDie;
 
     private enum State
@@ -49,7 +47,6 @@ public class Worm : MonoBehaviour
         _navMeshAgent.updateUpAxis = false;
 
         _currentState = _startState;
-        _runSpeed = _navMeshAgent.speed;
 
         _lastPosition = transform.position;
     }
@@ -147,19 +144,16 @@ public class Worm : MonoBehaviour
 
     public void PolygonColliderTurnOff()
     {
-        //_polygonCollider2D.enabled = false;
         _sword.GetComponent<CapsuleCollider2D>().enabled = false;
     }
     public void PolygonColliderTurnOn()
     {
-        //_polygonCollider2D.enabled = true;
         _sword.GetComponent<CapsuleCollider2D>().enabled = true;
     }
 
     //---Смерть---
     public void SetDeathState()
     {
-        //_polygonCollider2D.enabled = false;
         _sword.GetComponent<CapsuleCollider2D>().enabled = false;
         _navMeshAgent.ResetPath();
         _currentState = State.Death;
@@ -168,15 +162,17 @@ public class Worm : MonoBehaviour
     public void TakeDamage(int damage)
     {
         _currentHealth -= damage;
-
-        //OnTakeHit?.Invoke(this, EventArgs.Empty);
     }
     private void DetectDeath()
     {
         if (_currentHealth <= 0)
         {
             SetDeathState();
-            Instantiate(_droppedHeart, transform.position, transform.rotation);
+            float rand = UnityEngine.Random.Range(0, 100);
+            if (rand < 40)
+            {
+                Instantiate(_droppedHeart, transform.position, transform.rotation);
+            }
 
             OnDie?.Invoke(this, EventArgs.Empty);
             Destroy(gameObject);

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] public float health;
+    [SerializeField] private float _health;
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _heal;
 
@@ -24,11 +24,6 @@ public class Player : MonoBehaviour
     private Vector2 _moveVelocity;
 
     public static Player Instance { get; private set; }
-
-    private void Start()
-    {
-        GameInput.Instance.OnPlayerAttack += GameInput_OnPLayerAttack;
-    }
 
     private void Awake()
     {
@@ -72,13 +67,13 @@ public class Player : MonoBehaviour
 
     private void StatsHearts()
     {
-        if (health > _countHearts)
+        if (_health > _countHearts)
         {
-            health = _countHearts;
+            _health = _countHearts;
         }
         for (int i = 0; i < _hearts.Length; i++)
         {
-            if (i < Mathf.RoundToInt(health))
+            if (i < Mathf.RoundToInt(_health))
             {
                 _hearts[i].sprite = _fullHeart;
             }
@@ -94,7 +89,7 @@ public class Player : MonoBehaviour
 
     private void HealHearts()
     {
-        health += Time.deltaTime * _heal;
+        _health += Time.deltaTime * _heal;
     }
 
     public Vector3 GetPlayerPos()
@@ -110,18 +105,14 @@ public class Player : MonoBehaviour
 
     public void ChangeHealth(float healthValue)
     {
-        health += healthValue;
+        _health += healthValue;
 
-        if (health <= 0) 
+        if (_health <= 0) 
         {
-            Destroy(gameObject);       
+            Destroy(gameObject);
+            StatsHearts();
             _deathPanel.SetActive(true);
         }
-    }
-
-    private void GameInput_OnPLayerAttack(object sender, System.EventArgs e)
-    {
-        // ActiveWeapon.Instance.GetActiveWeapon().Attack();
     }
 }
 
