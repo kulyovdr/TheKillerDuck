@@ -15,6 +15,26 @@ public class Player : MonoBehaviour
     [SerializeField] private float _countHearts;
     [SerializeField] private GameObject _deathPanel;
 
+    [SerializeField] private Joystick _joystickMove;
+    [SerializeField] TypeControl _typeControl;
+
+    private enum TypeControl
+    {
+        PC, android
+    }
+
+    private void WhoIsController()
+    {
+        if (_typeControl == TypeControl.PC) 
+        {
+            _joystickMove.gameObject.SetActive(false);
+        }
+        else if (_typeControl == TypeControl.android)
+        {
+            _joystickMove.gameObject.SetActive(true);
+        }
+    }
+
     private Rigidbody2D _rigidbody2D;
 
     private bool _isRun = false;
@@ -33,6 +53,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        WhoIsController();
         MoveCalculate();
     }
 
@@ -51,6 +72,7 @@ public class Player : MonoBehaviour
             Destroy(other.gameObject);
         }
     }
+
 
     private void MoveCalculate()
     {

@@ -17,6 +17,7 @@ public class GameInput : MonoBehaviour
         _playerInputActions.Enable();
 
         _playerInputActions.Comdat.Attack.started += PlayerAttack_started;
+
     }
 
     public Vector2 GetMovementVector()
