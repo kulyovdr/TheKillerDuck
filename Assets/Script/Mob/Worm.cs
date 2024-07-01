@@ -176,6 +176,7 @@ public class Worm : MonoBehaviour
 
             OnDie?.Invoke(this, EventArgs.Empty);
             Destroy(gameObject);
+            CheckVictory.Instance.wormsCount--;
         }
     }
 

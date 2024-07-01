@@ -20,17 +20,21 @@ public class RoomsGenerator : MonoBehaviour
         foreach (var pos in infos.Keys)
         {
             var room = Instantiate(_roomPrefab, new Vector3(pos.x * 64f, pos.y * 36f), Quaternion.identity);
-            for (int i = 0; i < Random.Range(0, 4); i++)
+
+            int rand = Random.Range(0, 4);
+            for (int i = 0; i < rand; i++)
             {
                 Instantiate(_worm, new Vector3(pos.x * 64f, pos.y * 36f) + new Vector3(Random.Range(-18, 19), Random.Range(-10, 11)), Quaternion.identity);
             }
             room.Setup(infos[pos]);
 
+            CheckVictory.Instance.wormsCount += rand;
+
             yield return 0;
         }
     }
 
-    void Start()
+    private void Start()
     {
         StartCoroutine(Generate());
     }

@@ -396,6 +396,18 @@ PrefabInstance:
       propertyPath: enemyChangePos.y
       value: -15
       objectReference: {fileID: 0}
+    - target: {fileID: 302967752407508964, guid: 354b9912b751b3d4f9cf63e73f3a440f, type: 3}
+      propertyPath: _cameraChangePos.y
+      value: -36
+      objectReference: {fileID: 0}
+    - target: {fileID: 302967752407508964, guid: 354b9912b751b3d4f9cf63e73f3a440f, type: 3}
+      propertyPath: _playerChangePos.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 302967752407508964, guid: 354b9912b751b3d4f9cf63e73f3a440f, type: 3}
+      propertyPath: _playerChangePos.y
+      value: -10
+      objectReference: {fileID: 0}
     - target: {fileID: 4972085653401652329, guid: 354b9912b751b3d4f9cf63e73f3a440f, type: 3}
       propertyPath: m_Name
       value: RoomMoverDown
@@ -1139,6 +1151,22 @@ PrefabInstance:
       propertyPath: enemyChangePos.y
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 5557147436049219987, guid: 090eed394caa5304f950b32e044cdcd7, type: 3}
+      propertyPath: _cameraChangePos.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5557147436049219987, guid: 090eed394caa5304f950b32e044cdcd7, type: 3}
+      propertyPath: _cameraChangePos.y
+      value: 36
+      objectReference: {fileID: 0}
+    - target: {fileID: 5557147436049219987, guid: 090eed394caa5304f950b32e044cdcd7, type: 3}
+      propertyPath: _playerChangePos.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5557147436049219987, guid: 090eed394caa5304f950b32e044cdcd7, type: 3}
+      propertyPath: _playerChangePos.y
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1601,6 +1629,14 @@ PrefabInstance:
     - target: {fileID: 8534287967158310375, guid: d14284df0ffe8ea4ea6e5a21e7ffcb48, type: 3}
       propertyPath: enemyChangePos.x
       value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8534287967158310375, guid: d14284df0ffe8ea4ea6e5a21e7ffcb48, type: 3}
+      propertyPath: _cameraChangePos.x
+      value: -64
+      objectReference: {fileID: 0}
+    - target: {fileID: 8534287967158310375, guid: d14284df0ffe8ea4ea6e5a21e7ffcb48, type: 3}
+      propertyPath: _playerChangePos.x
+      value: -6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2521,6 +2557,14 @@ PrefabInstance:
     - target: {fileID: 6002622233531387290, guid: 38570a744ce2cb34089959ab52bbfcc3, type: 3}
       propertyPath: enemyChangePos.x
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6002622233531387290, guid: 38570a744ce2cb34089959ab52bbfcc3, type: 3}
+      propertyPath: _cameraChangePos.x
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 6002622233531387290, guid: 38570a744ce2cb34089959ab52bbfcc3, type: 3}
+      propertyPath: _playerChangePos.x
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6432334886607431379, guid: 38570a744ce2cb34089959ab52bbfcc3, type: 3}
       propertyPath: m_LocalPosition.x
