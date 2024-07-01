@@ -1,5 +1,7 @@
 # The Killer Duck v1.1 (последняя версия)
 ***Top down 2D shooter***
+![Обложка](https://github.com/kulyovdr/TheKillerDuck/assets/145135046/fe40b2e7-48d1-4bd7-8364-631c747c03fa)
+
 
 # Changelog
 ***Версия 1.1***
@@ -32,7 +34,6 @@ Build - собранная игра.
 ## 1. Скрипты
 Скрипты в игре представляют из себя .cs файлы. 
 Главная сцена в игре - Game (номер 1), запускается после сцены Menu c помощью скрипта GameManager благодаря методу Play(). 
-![menu](https://github.com/kulyovdr/TheKillerDuck/assets/145135046/e6f16fee-9e2c-4fec-9aa1-d30eaf634ae2)
 
 ### 1.1. Генерация уровня
 Генерация реализована в методe Graph.cs. Скрипты ChangeRoom.cs, Openings.cs, Room.cs, RoomsGenerator.cs обеспечивают логику генерации комнат и перехода между ними.
