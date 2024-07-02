@@ -1,9 +1,5 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using Unity.AI.Navigation;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class RoomsGenerator : MonoBehaviour
 {
@@ -15,7 +11,7 @@ public class RoomsGenerator : MonoBehaviour
     private IEnumerator Generate()
     {
         Graph graph = gameObject.AddComponent<Graph>();
-        var infos = graph.Generate1(_count);
+        var infos = graph.Generate(_count);
 
         foreach (var pos in infos.Keys)
         {
