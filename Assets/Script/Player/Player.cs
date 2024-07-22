@@ -1,3 +1,4 @@
+using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,25 +16,6 @@ public class Player : MonoBehaviour
     [SerializeField] private float _countHearts;
     [SerializeField] private GameObject _deathPanel;
 
-    [SerializeField] private Joystick _joystickMove;
-    [SerializeField] TypeControl _typeControl;
-
-    private enum TypeControl
-    {
-        PC, android
-    }
-
-    private void WhoIsController()
-    {
-        if (_typeControl == TypeControl.PC) 
-        {
-            _joystickMove.gameObject.SetActive(false);
-        }
-        else if (_typeControl == TypeControl.android)
-        {
-            _joystickMove.gameObject.SetActive(true);
-        }
-    }
 
     private Rigidbody2D _rigidbody2D;
 
@@ -45,6 +27,37 @@ public class Player : MonoBehaviour
 
     public static Player Instance { get; private set; }
 
+    [SerializeField] public Joystick _joystickMove;
+    [SerializeField] private Joystick _joystickAttack;
+    [SerializeField] public TypeControl _typeControl;
+
+    public enum TypeControl
+    {
+        PC, Android
+    }
+
+    private void WhoIsController()
+    {
+        if (_typeControl == TypeControl.PC) 
+        {
+            _joystickMove.gameObject.SetActive(false);
+            _joystickAttack.gameObject.SetActive(false);
+
+            _moveInput = GameInput.Instance.GetMovementVectorKeyboard();
+            MoveCalculate(_moveInput);
+
+        }
+        else if (_typeControl == TypeControl.Android)
+        {
+            _joystickMove.gameObject.SetActive(true);
+            _joystickAttack.gameObject.SetActive(true);
+
+            _moveInput = new Vector2(_joystickMove.Horizontal, _joystickMove.Vertical);
+            //_moveInput = GameInput.Instance.GetMovementVectorJoystick(); 
+            MoveCalculate(_moveInput);
+        }
+    }
+
     private void Awake()
     {
         Instance = this;
@@ -54,7 +67,8 @@ public class Player : MonoBehaviour
     private void Update()
     {
         WhoIsController();
-        MoveCalculate();
+        //FlipForJoystick();
+        //MoveCalculate();
     }
 
     private void FixedUpdate()
@@ -74,9 +88,8 @@ public class Player : MonoBehaviour
     }
 
 
-    private void MoveCalculate()
+    private void MoveCalculate(Vector2 _moveInput)
     {
-        _moveInput = GameInput.Instance.GetMovementVector();
         _moveVelocity = _moveInput.normalized * _moveSpeed;
 
         if (Mathf.Abs(_moveInput.x) > _minMoveSpeed || Mathf.Abs(_moveInput.y) > _minMoveSpeed) 

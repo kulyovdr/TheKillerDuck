@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
 
 public class GameInput : MonoBehaviour
 {
@@ -20,15 +21,18 @@ public class GameInput : MonoBehaviour
 
     }
 
-    public Vector2 GetMovementVector()
+    public Vector2 GetMovementVectorKeyboard()
     {
         Vector2 inputVector = _playerInputActions.Player.Move.ReadValue<Vector2>();
         return inputVector;
     }
-    public bool IsAttacking()
+
+   /* public Vector2 GetMovementVectorJoystick()
     {
-        return _playerInputActions.Comdat.Attack.triggered;
-    }
+        Vector2 inputVector = _playerInputActions.Player.Move.ReadValue<Vector2>();
+        return inputVector;
+    }*/
+
 
     public Vector3 GetMousePosition()
     {

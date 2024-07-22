@@ -128,11 +128,11 @@
                 },
                 {
                     "name": "",
-                    "id": "32a9a697-ccdc-4179-8cd0-89910c74db9d",
+                    "id": "902e0022-b29c-4632-bcc5-a0235c623039",
                     "path": "<AndroidJoystick>/stick",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Joystick",
+                    "groups": "",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": false

@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
@@ -22,6 +23,15 @@ public class PlayerVisual : MonoBehaviour
         MovePos_ForMouse_ForKeyboard();
     }
 
+    private void joysticAttackFlip()
+    {
+        Player player = Player.Instance;
+      //  if ( player._typeControl == player.TypeControl.Android)
+        
+
+        
+    }
+
     private void MovePos_ForMouse_ForKeyboard()
     {
         Vector3 mousePOs = GameInput.Instance.GetMousePosition();
@@ -41,6 +51,16 @@ public class PlayerVisual : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, 180, 0);
         }
         else if (Input.GetKey(KeyCode.D))
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+
+        Player player = Player.Instance;
+        if (player._joystickMove.Horizontal < 0)
+        {
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
+        else if (player._joystickMove.Horizontal > 0)
         {
             transform.rotation = Quaternion.Euler(0, 0, 0);
         }
