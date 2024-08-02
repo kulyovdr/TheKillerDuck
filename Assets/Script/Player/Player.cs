@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,6 +15,8 @@ public class Player : MonoBehaviour
     [SerializeField] private Sprite _fullHeart;
     [SerializeField] private Sprite _emptyHeart;
     [SerializeField] private float _countHearts;
+
+    [SerializeField] GameManager gameManager;
     [SerializeField] private GameObject _deathPanel;
 
 
@@ -27,33 +30,38 @@ public class Player : MonoBehaviour
 
     public static Player Instance { get; private set; }
 
-    [SerializeField] public Joystick _joystickMove;
-    [SerializeField] private Joystick _joystickAttack;
+    [SerializeField] public Joystick joystickMove;
+    [SerializeField] public Joystick joystickAttack;
     [SerializeField] public TypeControl _typeControl;
 
     public enum TypeControl
     {
-        PC, Android
+        PC, Android, none
     }
 
-    private void WhoIsController()
+    public void WhoIsController()
     {
-        if (_typeControl == TypeControl.PC) 
+        int ModeController = gameManager.Switch();
+
+        if (ModeController == 1) //_typeControl == TypeControl.PC 
         {
-            _joystickMove.gameObject.SetActive(false);
-            _joystickAttack.gameObject.SetActive(false);
+            _typeControl = TypeControl.PC;
+
+            joystickMove.gameObject.SetActive(false);
+            joystickAttack.gameObject.SetActive(false);
 
             _moveInput = GameInput.Instance.GetMovementVectorKeyboard();
             MoveCalculate(_moveInput);
 
         }
-        else if (_typeControl == TypeControl.Android)
+        else if (ModeController == 0) //_typeControl == TypeControl.Android 
         {
-            _joystickMove.gameObject.SetActive(true);
-            _joystickAttack.gameObject.SetActive(true);
+            _typeControl = TypeControl.Android;
 
-            _moveInput = new Vector2(_joystickMove.Horizontal, _joystickMove.Vertical);
-            //_moveInput = GameInput.Instance.GetMovementVectorJoystick(); 
+            joystickMove.gameObject.SetActive(true);
+            joystickAttack.gameObject.SetActive(true);
+
+            _moveInput = new Vector2(joystickMove.Horizontal, joystickMove.Vertical);
             MoveCalculate(_moveInput);
         }
     }

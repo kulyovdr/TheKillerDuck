@@ -1,9 +1,15 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject panelPause;
+    [SerializeField] GameObject panelPause;
+    [SerializeField] GameObject joystick;
+
+    [SerializeField] Player player;
+
+    private bool isAndroidControl = false;
 
     public void Play()
     {
@@ -23,5 +29,36 @@ public class GameManager : MonoBehaviour
     {
         panelPause.SetActive(false);
         Time.timeScale = 1f;
+    }
+
+
+    public void Update()
+    {
+        Switch();
+    }
+
+    public void OnAndroidButtonClick()
+    {
+        isAndroidControl = true;
+        joystick.SetActive(true);
+    }
+
+    public void OnPCButtonClick()
+    {
+        isAndroidControl = false;
+        joystick.SetActive(false);
+    }
+
+    public int Switch()
+    {
+        if (isAndroidControl == true)
+        {
+            return 0;
+        }
+        else if (isAndroidControl == false)
+        {
+            return 1;
+        }
+        return 100; //пойми свойства дура и не пиши говно
     }
 }

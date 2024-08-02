@@ -16,6 +16,8 @@ public class Gun : MonoBehaviour
     private void Update()
     {
         MoveGunToMouse();
+        MoveGunToJoysticAttack();
+
         Bullet_Path_Cooldown();
     }
 
@@ -24,6 +26,11 @@ public class Gun : MonoBehaviour
         _difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         _rotateZ = Mathf.Atan2(_difference.y, _difference.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0f, 0f, _rotateZ + _offset);
+    }
+
+    private void MoveGunToJoysticAttack()
+    {
+        
     }
 
     private void Bullet_Path_Cooldown()

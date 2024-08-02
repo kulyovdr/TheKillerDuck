@@ -26,15 +26,14 @@ public class PlayerVisual : MonoBehaviour
     private void joysticAttackFlip()
     {
         Player player = Player.Instance;
-      //  if ( player._typeControl == player.TypeControl.Android)
-        
-
-        
+      //  if ( player._typeControl == player.TypeControl.Android)      
     }
 
     private void MovePos_ForMouse_ForKeyboard()
     {
         Vector3 mousePOs = GameInput.Instance.GetMousePosition();
+       // Vector3 joysticPOs = GameInput.Instance.GetJoystickPosition();
+
         Vector3 playerPOs = Player.Instance.GetPlayerPos();
 
         if (mousePOs.x < playerPOs.x) 
@@ -56,11 +55,11 @@ public class PlayerVisual : MonoBehaviour
         }
 
         Player player = Player.Instance;
-        if (player._joystickMove.Horizontal < 0)
+        if (player.joystickMove.Horizontal < 0 || player.joystickAttack.Horizontal < 0)
         {
             transform.rotation = Quaternion.Euler(0, 180, 0);
         }
-        else if (player._joystickMove.Horizontal > 0)
+        else if (player.joystickMove.Horizontal > 0 || player.joystickAttack.Horizontal > 0)
         {
             transform.rotation = Quaternion.Euler(0, 0, 0);
         }

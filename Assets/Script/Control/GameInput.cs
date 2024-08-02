@@ -5,6 +5,9 @@ using UnityEngine.InputSystem.Controls;
 
 public class GameInput : MonoBehaviour
 {
+    [SerializeField] public Joystick joystickMove;
+    [SerializeField] public Joystick joystickAttack;
+
     public static GameInput Instance { get; private set; }
     private PlayerInputActions _playerInputActions;
 
@@ -27,18 +30,17 @@ public class GameInput : MonoBehaviour
         return inputVector;
     }
 
-   /* public Vector2 GetMovementVectorJoystick()
-    {
-        Vector2 inputVector = _playerInputActions.Player.Move.ReadValue<Vector2>();
-        return inputVector;
-    }*/
-
-
     public Vector3 GetMousePosition()
     {
         Vector3 mousePosit = Mouse.current.position.ReadValue();
         return mousePosit;
     }
+
+    //public Vector2 GetJoystickPosition()
+   // {
+        //Vector2 joystickInput = joystickAttack.position;
+       // return joystickPosition;
+   // }
 
     private void PlayerAttack_started(InputAction.CallbackContext odj)
     {
